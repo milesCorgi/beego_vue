@@ -20,7 +20,6 @@ func init() {
 	if errRegisterDriver != nil {
 		logs.Info(" RegisterDriver err!" + errRegisterDriver.Error())
 	}
-	//orm.RegisterDataBase("default", "mysql", "root:@tcp(172.25.43.6:3306)/stress_task_platform?charset=utf8")
 	errRegisterDataBase := orm.RegisterDataBase("default", "mysql", dataSource)
 	if errRegisterDataBase != nil {
 		logs.Info(" RegisterDriver err!" + errRegisterDataBase.Error())

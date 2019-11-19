@@ -26,16 +26,16 @@
             <el-row>
                 <el-table :data="todoList" style="width: 100%" border>
                     <el-table-column prop="book_name" label="Todo" min-width="100">
-                        <template scope="scope"> {{ scope.row.fields.Todo_body }}</template>
+                        <template scope="scope"> {{ scope.row.Todo_body }}</template>
                     </el-table-column>
                     <el-table-column prop="add_time" label="添加时间" min-width="100">
-                        <template scope="scope"> {{ scope.row.fields.add_time }}</template>
+                        <template scope="scope"> {{ scope.row.add_time }}</template>
                     </el-table-column>
                     <el-table-column prop="id" label="更新时间" min-width="100">
-                        <template scope="scope"> {{ scope.row.fields.update_time }}</template>
+                        <template scope="scope"> {{ scope.row.update_time }}</template>
                     </el-table-column>
                     <el-table-column prop="id" label="状态" min-width="100">
-                        <template scope="scope"> {{ scope.row.fields.status }}</template>
+                        <template scope="scope"> {{ scope.row.status }}</template>
                     </el-table-column>
                     <el-table-column label="操作" min-width="100">
                         <template scope="scope">
@@ -115,6 +115,7 @@ export default {
       this.$http.get('/api/show_todos')
         .then((response) => {
           let res = response.data
+          console.log(res)
           if (res.error_num === 0) {
             this.todoList = res['list']
             console.log(this.todoList)
