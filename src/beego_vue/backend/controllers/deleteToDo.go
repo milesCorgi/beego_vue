@@ -18,18 +18,14 @@ type DeleteController struct {
 
 func (c *DeleteController) DeleteTodo() {
 	o := orm.NewOrm()
-	var todos []models.Todo
 	// 读取所有数据
 	deleteId, _ := strconv.Atoi(c.GetString("Todo_id"))
 	logs.Info("------------", deleteId)
 	wholeResult := map[string]interface{}{"error_num": 400, "msg": "查询出错"}
-	_, errOrmRead := o.QueryTable("todo").All(&todos)
-	if errOrmRead != nil {
-		logs.Info(" errOrmRead err!" + errOrmRead.Error())
+	_, errDelete := o.Delete(&models.Todo{Id: deleteId})
+	if errDelete != nil {
+		logs.Info(" errDelete err!" + errDelete.Error())
 	} else {
-		for _, todo := range todos {
-			logs.Info(todo)
-		}
 		//logs.Info(num)
 		wholeResult["msg"] = "success"
 		wholeResult["error_num"] = 0
