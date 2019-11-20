@@ -9,4 +9,5 @@ func init() {
 	// Get方法对应MainController对象里的Show
 	beego.Router("/", &controllers.MainController{}, "get:Show")
 	beego.Router("/api/show_todos", &controllers.ShowController{}, "get:ShowTodo")
+	beego.Router("/api/delete_todos", &controllers.DeleteController{}, "post:DeleteTodo")
 }

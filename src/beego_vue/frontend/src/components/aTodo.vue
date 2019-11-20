@@ -25,23 +25,26 @@
         <div>
             <el-row>
                 <el-table :data="todoList" style="width: 100%" border>
+                  <el-table-column prop="book_name" label="编号" min-width="100">
+                    <template scope="scope"> {{ scope.row.Id }}</template>
+                  </el-table-column>
                     <el-table-column prop="book_name" label="Todo" min-width="100">
                         <template scope="scope"> {{ scope.row.Todo_body }}</template>
                     </el-table-column>
                     <el-table-column prop="add_time" label="添加时间" min-width="100">
-                        <template scope="scope"> {{ scope.row.add_time }}</template>
+                        <template scope="scope"> {{ scope.row.Add_time }}</template>
                     </el-table-column>
                     <el-table-column prop="id" label="更新时间" min-width="100">
-                        <template scope="scope"> {{ scope.row.update_time }}</template>
+                        <template scope="scope"> {{ scope.row.Update_time }}</template>
                     </el-table-column>
                     <el-table-column prop="id" label="状态" min-width="100">
-                        <template scope="scope"> {{ scope.row.status }}</template>
+                        <template scope="scope"> {{ scope.row.Status }}</template>
                     </el-table-column>
                     <el-table-column label="操作" min-width="100">
                         <template scope="scope">
-                            <i class="el-icon-edit" @click="openEditDialog(scope.row.pk)"
+                            <i class="el-icon-edit" @click="openEditDialog(scope.row.Id)"
                                style="cursor:pointer;margin-right: 20px">编辑</i>
-                            <i class="el-icon-delete" @click="delete_todo(scope.row.pk)" style="cursor:pointer"
+                            <i class="el-icon-delete" @click="delete_todo(scope.row.Id)" style="cursor:pointer"
                                scope="scope">删除</i>
                         </template>
 
@@ -126,15 +129,14 @@ export default {
         })
     },
     delete_todo (id) {
-      let postdata = Qs.stringify({'Todo_id': id})
-      this.$http.post('/api/delete_todos', postdata)
+      this.$http.post('/api/delete_todos', {Todo_id: id}, {emulateJSON: true})
         .then((response) => {
           console.log(response)
           let res = response.data
           if (res.error_num === 0) {
             this.showtodos()
           } else {
-            alert('新增Todo失败，请重试')
+            alert('删除Todo失败，请重试')
             console.log(res['msg'])
           }
         })
