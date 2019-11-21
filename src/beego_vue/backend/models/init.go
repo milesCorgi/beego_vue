@@ -15,7 +15,7 @@ func init() {
 	mysqlPort := beego.AppConfig.String(`mysqlport`)
 	mysqlPass := beego.AppConfig.String(`mysqlpass`)
 	mysqlDb := beego.AppConfig.String(`mysqldb`)
-	dataSource := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8", mysqlUser, mysqlPass, mysqlIp, mysqlPort, mysqlDb)
+	dataSource := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&loc=Local", mysqlUser, mysqlPass, mysqlIp, mysqlPort, mysqlDb)
 	errRegisterDriver := orm.RegisterDriver("mysql", orm.DRMySQL)
 	if errRegisterDriver != nil {
 		logs.Info(" RegisterDriver err!" + errRegisterDriver.Error())

@@ -24,6 +24,7 @@ func (c *AddController) AddTodo() {
 	logs.Info("------------", todoBody)
 	todo.Status = 0
 	todo.Todo_body = todoBody
+	time.Now().Location()
 	todo.Add_time = time.Now()
 	todo.Update_time = time.Now()
 	wholeResult := map[string]interface{}{"error_num": 400, "msg": "查询出错"}
