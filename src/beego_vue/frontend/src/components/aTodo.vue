@@ -82,8 +82,7 @@ export default {
   },
   methods: {
     addTodo () {
-      let posData = Qs.stringify({'Todo_body': this.input})
-      this.$http.post('/api/add_todos', posData)
+      this.$http.post('/api/add_todos', {'Todo_body': this.input}, {emulateJSON: true})
         .then((response) => {
           console.log(response)
           let res = response.data

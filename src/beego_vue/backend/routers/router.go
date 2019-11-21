@@ -10,4 +10,5 @@ func init() {
 	beego.Router("/", &controllers.MainController{}, "get:Show")
 	beego.Router("/api/show_todos", &controllers.ShowController{}, "get:ShowTodo")
 	beego.Router("/api/delete_todos", &controllers.DeleteController{}, "post:DeleteTodo")
+	beego.Router("/api/add_todos", &controllers.AddController{}, "post:AddTodo")
 }
