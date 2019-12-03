@@ -141,8 +141,7 @@ export default {
         })
     },
     editTodo () {
-      let posData = Qs.stringify({'Todo_body': this.toBeEditBody})
-      this.$http.post('/api/edit_todos/' + this.toBeEditId, posData)
+      this.$http.post('/api/edit_todos', {Todo_id: this.toBeEditId, Todo_body: this.toBeEditBody}, {emulateJSON: true})
         .then((response) => {
           console.log(response)
           let res = response.data
@@ -158,17 +157,6 @@ export default {
     openEditDialog (id) {
       this.openEditDialogFlag = true
       this.toBeEditId = id
-      this.$http.get('/api/edit_todos/' + this.toBeEditId)
-        .then((response) => {
-          let res = response.data
-          if (res.error_num === 0) {
-            console.log(res['list'][0].fields.Todo_body)
-            this.toBeEditBody = res['list'][0].fields.Todo_body
-          } else {
-            this.$message.error('查询Todo失败')
-            console.log(res['msg'])
-          }
-        })
     }
   }
 }
